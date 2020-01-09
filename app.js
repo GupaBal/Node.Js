@@ -1,29 +1,28 @@
 const express = require('express'); // express 를 사용
 const app = express(); // express라는 모듈로 app이란 객체를 생성
-
+var bodyParser = require('body-parser'); // bodyparser을 사용
 app.use(express.static('public')); // 정적인 파일이 위치할 디렉토리를 지정하는 기
 app.get('/', function(req,res){
   res.send('Hello home page');
 });
-app.get('/dynamic',function(req,res){
-var lis = '';
-for(var i=0; i<5; i++){
-  lis = lis +'<li>coding</li>';
-}
-
-app.get('/topic',function(req,res){
+app.use(bodyParser.urlencoded({extended: false}))  //app.use로 bodyParser를 사용하겠 (bodyparser미들웨이임 )
+app.get('/topic/:id',function(req,res){
   var topics = [
     'Javascript is....',
     'Nodejs is.....',
     'Express is....'
   ];
-  var str = `
+  var output = `
   <a href="/topic?id=0">JavaScript</a><br>
-  <a href="/topic?id=0">Node.js</a><br>
-  <a href="/topic?id=0">Express</a><br>
-  `;
-  var output2 = str + topics[req.query.id]
-  res.send(output2);
+  <a href="/topic?id=1">Node.js</a><br>
+  <a href="/topic?id=2">Express</a><br>
+  ${topics[req.query.id]}`
+
+  res.send(output);
+})
+
+app.get('/topic/:id/:mode',function(req, res){
+  res.send(req.params.id+','+req.params.mode)
 })
 
 app.get('/apros',function(req,res){
