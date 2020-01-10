@@ -2,7 +2,7 @@
 
 1/8 ~ 1/9
 
-* **EXPRESS**
+* ***EXPRESS***
   - *URL을 이용한 query 라우팅* 
 * **Supervisor**
   - *Supervisor을 이용한 프로그램 자동 업데이트*   
